@@ -147,4 +147,124 @@ public class NoteTest {
 		new Note(Note.C, -1);		
 	}
 	
+	
+	@Test
+	public final void testTranspose(){		
+		String[] notes = {"C", "D", "E3", "F", "G4", "A", "B7", "C#1", "D2", "Db", "D#5", "Eb5", "E8", "F", "F#1", "A5", "G", "B", "Bb8"};
+		
+		for(int i=0; i<notes.length; i++){
+			for(int j=-Interval.OCTAVE; j<Interval.OCTAVE; j++){				
+				Note n1 = new Note(notes[i]);
+				Note n2 = Interval.findNoteByInterval(n1, j);
+				n1.transpose(j);
+				assertEquals(n1, n2);			
+			}
+		}		
+	}
+	
+	@Test
+	public final void testTranspose2(){
+		
+		int minNote = Note.C;
+		int maxNote = Note.B;
+		int minOct = Note.MIN_OCTAVE;
+		int maxOct = Note.MAX_OCTAVE;		
+		
+		for(int i=minNote; i<=maxNote; i++){						
+			for(int j=minOct+1; j<maxOct; j++){
+				Note n1 = new Note(i, j);
+				for(int k=-Interval.OCTAVE; k<Interval.OCTAVE; k++){					
+					Note n2 = Interval.findNoteByInterval(n1, k);
+					n1.transpose(k);
+					assertEquals(n1, n2);
+					n1.transpose(-k);					
+				}				
+			}		
+		}	
+	}
+	
+	@Test
+	public final void testTransposeManuallyAsc(){
+		
+		Note a = new Note("C");
+		
+		a.transpose(2);
+		assertEquals(a, new Note("D"));
+		
+		a.transpose(2);
+		assertEquals(a, new Note("E"));
+		
+		a.transpose(2);
+		assertEquals(a, new Note("f#"));
+		
+		a.transpose(2);
+		assertEquals(a, new Note("ab"));
+		
+		a.transpose(1);
+		assertEquals(a, new Note("a"));
+		
+		a.transpose(3);
+		assertEquals(a, new Note("c5"));
+		
+		a.transpose(3);
+		assertEquals(a, new Note("eb5"));
+		
+		a.transpose(12);
+		assertEquals(a, new Note("eb6"));		
+		
+	}
+	
+	@Test
+	public final void testTransposeManuallyDesc(){
+		
+		Note a = new Note("C");
+		
+		a.transpose(-2);
+		assertEquals(a, new Note("Bb3"));
+		
+		a.transpose(-2);
+		assertEquals(a, new Note("Ab3"));
+		
+		a.transpose(-2);
+		assertEquals(a, new Note("f#3"));
+		
+		a.transpose(-2);
+		assertEquals(a, new Note("e3"));
+		
+		a.transpose(-1);
+		assertEquals(a, new Note("d#3"));
+		
+		a.transpose(-3);
+		assertEquals(a, new Note(Note.C, 3));
+		
+		a.transpose(-3);
+		assertEquals(a, new Note(Note.A, 2));
+		
+		a.transpose(-12);
+		assertEquals(a, new Note(Note.A, 1));		
+		
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testTransposeIllegal1(){
+		new Note(Note.C, 4).transpose(-5000);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testTransposeIllegal2(){		
+		new Note(Note.C, 4).transpose(5000);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testTransposeIllegal3(){		
+		new Note(Note.C, 0).transpose(-1);
+	}
+
+	
+	
+	
+	
+	
+	
 }

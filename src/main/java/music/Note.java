@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class Note {
 
-	private static final int MIDDLE_OCTAVE = 4;
-	private static final int MIN_OCTAVE = 0;
-	private static final int MAX_OCTAVE = 9;
+	public static final int MIDDLE_OCTAVE = 4;
+	public static final int MIN_OCTAVE = 0;
+	public static final int MAX_OCTAVE = 9;
 
 	private static final String[] noteNames = { "C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A",
 			"A#/Bb", "B" };
@@ -58,6 +58,12 @@ public class Note {
 	 */
 	public Note(int note) {
 		setNote(note, MIDDLE_OCTAVE);
+	}
+	
+	
+	public Note(Note n){
+		this.note = n.note;
+		this.octave = n.octave;
 	}
 	
 	
@@ -142,7 +148,24 @@ public class Note {
 	public void setOctave(int octave) {
 		setNote(this.note, octave);
 	}
+	
+	
+	public void transpose(int semitones){
+		
+		int newNote = Math.floorMod(getNote() + semitones, 12);
 
+		int newOctave = getOctave() + Math.floorDiv(getNote() + semitones, 12);
+		
+		if(noteIsValid(newNote) && octaveIsValid(newOctave)){
+			
+			setNote(newNote, newOctave);
+			
+		} else {
+			throw new IllegalArgumentException("Wrong transposition arguments.");			
+		}
+	}
+	
+	
 	/**
 	 * Checks whether a note value is valid or not.
 	 * 
@@ -184,5 +207,18 @@ public class Note {
 	public String toString() {
 		return noteNames[this.note] + octave;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o.getClass() == this.getClass()){
+			
+			return ((Note)o).note == this.note && ((Note)o).octave == this.octave;
+			
+		}
+		return false;
+		
+	}
+	
+	
 
 }

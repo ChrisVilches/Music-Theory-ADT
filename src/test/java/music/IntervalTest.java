@@ -12,19 +12,19 @@ public class IntervalTest {
 		Note a, b;
 		
 		a = new Note(Note.A, 4);
-		b = Interval.findNoteByInterval(a, Interval.MIN7, Interval.ASC);
+		b = Interval.findNoteByInterval(a, Interval.MIN7);
 		assertEquals(b.toString(), "G5");
 		
 		a = new Note(Note.B, 4);
-		b = Interval.findNoteByInterval(a, Interval.PERF5, Interval.ASC);
+		b = Interval.findNoteByInterval(a, Interval.PERF5);
 		assertEquals(b.toString(), "F#/Gb5");
 		
 		a = new Note(Note.G, 4);
-		b = Interval.findNoteByInterval(a, Interval.PERF4, Interval.ASC);
+		b = Interval.findNoteByInterval(a, Interval.PERF4);
 		assertEquals(b.toString(), "C5");
 		
 		a = new Note(Note.B, 6);
-		b = Interval.findNoteByInterval(a, Interval.MIN2, Interval.ASC);
+		b = Interval.findNoteByInterval(a, Interval.MIN2);
 		assertEquals(b.toString(), "C7");
 		
 		assertEquals(Interval.findNoteByInterval(new Note("C5"), Interval.PERF4).toString(), "F5");
@@ -47,29 +47,29 @@ public class IntervalTest {
 		
 		Note a;
 		
-		a = Interval.findNoteByInterval(new Note(Note.C), Interval.MAJ2, Interval.DESC);
+		a = Interval.findNoteByInterval(new Note(Note.C), -Interval.MAJ2);
 		assertEquals(a.toString(), "A#/Bb3");
 		
-		a = Interval.findNoteByInterval(new Note(Note.D), Interval.MAJ2, Interval.DESC);
+		a = Interval.findNoteByInterval(new Note(Note.D), -Interval.MAJ2);
 		assertEquals(a.toString(), "C4");
 		
-		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 5), Interval.PERF4, Interval.DESC);
+		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 5), -Interval.PERF4);
 		assertEquals(a.toString(), "C#/Db5");
 		
-		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 5), Interval.PERF5, Interval.DESC);
+		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 5), -Interval.PERF5);
 		assertEquals(a.toString(), "B4");	
 		
-		assertEquals(Interval.findNoteByInterval(new Note("C5"), Interval.PERF4, Interval.DESC).toString(), "G4");
-		assertEquals(Interval.findNoteByInterval(new Note("C#5"), Interval.PERF4, Interval.DESC).toString(), "G#/Ab4");
-		assertEquals(Interval.findNoteByInterval(new Note("D5"), Interval.PERF4, Interval.DESC).toString(), "A4");
-		assertEquals(Interval.findNoteByInterval(new Note("D#5"), Interval.MAJ3, Interval.DESC).toString(), "B4");
-		assertEquals(Interval.findNoteByInterval(new Note("D#5"), Interval.MIN3, Interval.DESC).toString(), "C5");
-		assertEquals(Interval.findNoteByInterval(new Note("Bb4"), Interval.PERF4, Interval.DESC).toString(), "F4");
-		assertEquals(Interval.findNoteByInterval(new Note("A#5"), Interval.PERF4, Interval.DESC).toString(), "F5");
-		assertEquals(Interval.findNoteByInterval(new Note("C5"), Interval.MIN7, Interval.DESC).toString(), "D4");
-		assertEquals(Interval.findNoteByInterval(new Note("B5"), Interval.MAJ7, Interval.DESC).toString(), "C5");
-		assertEquals(Interval.findNoteByInterval(new Note("G#5"), Interval.MIN2, Interval.DESC).toString(), "G5");
-		assertEquals(Interval.findNoteByInterval(new Note("C5"), Interval.MAJ2, Interval.DESC).toString(), "A#/Bb4");		
+		assertEquals(Interval.findNoteByInterval(new Note("C5"), -Interval.PERF4).toString(), "G4");
+		assertEquals(Interval.findNoteByInterval(new Note("C#5"), -Interval.PERF4).toString(), "G#/Ab4");
+		assertEquals(Interval.findNoteByInterval(new Note("D5"), -Interval.PERF4).toString(), "A4");
+		assertEquals(Interval.findNoteByInterval(new Note("D#5"), -Interval.MAJ3).toString(), "B4");
+		assertEquals(Interval.findNoteByInterval(new Note("D#5"), -Interval.MIN3).toString(), "C5");
+		assertEquals(Interval.findNoteByInterval(new Note("Bb4"), -Interval.PERF4).toString(), "F4");
+		assertEquals(Interval.findNoteByInterval(new Note("A#5"), -Interval.PERF4).toString(), "F5");
+		assertEquals(Interval.findNoteByInterval(new Note("C5"), -Interval.MIN7).toString(), "D4");
+		assertEquals(Interval.findNoteByInterval(new Note("B5"), -Interval.MAJ7).toString(), "C5");
+		assertEquals(Interval.findNoteByInterval(new Note("G#5"), -Interval.MIN2).toString(), "G5");
+		assertEquals(Interval.findNoteByInterval(new Note("C5"), -Interval.MAJ2).toString(), "A#/Bb4");		
 	}
 	
 	@Test
@@ -77,13 +77,13 @@ public class IntervalTest {
 		
 		Note a;
 		
-		a = Interval.findNoteByInterval(new Note(Note.B, 6), Interval.OCTAVE, Interval.ASC);
+		a = Interval.findNoteByInterval(new Note(Note.B, 6), Interval.OCTAVE);
 		assertEquals(a.toString(), "B7");
 		
-		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 4), Interval.OCTAVE, Interval.ASC);
+		a = Interval.findNoteByInterval(new Note(Note.Fsharp, 4), Interval.OCTAVE);
 		assertEquals(a.toString(), "F#/Gb5");
 		
-		a = Interval.findNoteByInterval(new Note(Note.Db, 3), Interval.OCTAVE, Interval.ASC);
+		a = Interval.findNoteByInterval(new Note(Note.Db, 3), Interval.OCTAVE);
 		assertEquals(a.toString(), "C#/Db4");	
 		
 	}
