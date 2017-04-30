@@ -153,9 +153,9 @@ public class NoteTest {
 		String[] notes = {"C", "D", "E3", "F", "G4", "A", "B7", "C#1", "D2", "Db", "D#5", "Eb5", "E8", "F", "F#1", "A5", "G", "B", "Bb8"};
 		
 		for(int i=0; i<notes.length; i++){
-			for(int j=-Interval.OCTAVE; j<Interval.OCTAVE; j++){				
+			for(int j=-Interval.OCTAVE.getValue(); j<Interval.OCTAVE.getValue(); j++){				
 				Note n1 = new Note(notes[i]);
-				Note n2 = Interval.findNoteByInterval(n1, j);
+				Note n2 = n1.findNoteByInterval(j);
 				n1.transpose(j);
 				assertEquals(n1, n2);			
 			}
@@ -173,11 +173,11 @@ public class NoteTest {
 		for(int i=minNote; i<=maxNote; i++){						
 			for(int j=minOct+1; j<maxOct; j++){
 				Note n1 = new Note(i, j);
-				for(int k=-Interval.OCTAVE; k<Interval.OCTAVE; k++){					
-					Note n2 = Interval.findNoteByInterval(n1, k);
+				for(int k=-Interval.OCTAVE.getValue(); k<Interval.OCTAVE.getValue(); k++){					
+					Note n2 = n1.findNoteByInterval(k);
 					n1.transpose(k);
 					assertEquals(n1, n2);
-					n1.transpose(-k);					
+					n1.transpose(-k);
 				}				
 			}		
 		}	

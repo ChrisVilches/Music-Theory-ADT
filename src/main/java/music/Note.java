@@ -202,6 +202,62 @@ public class Note {
 		this.octave = octave;
 
 	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * Pass a note and an interval, and this method will find the resulting
+	 * note.
+	 * 
+	 * For example, if the first note is C, and the interval is a perfect fifth
+	 * ({@code Interval.PERF5 }) then the result will be a G note.
+	 * 
+	 * @param firstNote
+	 *            The interval's first note
+	 * @param interval
+	 *            Use the constants {@code Interval.DIM5}, etc
+	 * @return The interval's second note
+	 */
+	public Note findNoteByInterval(int interval) {			
+		
+		Note newNote = new Note(this);
+		
+		newNote.transpose(interval);
+		
+		return newNote;
+	}
+	
+	public Note findNoteByInterval(Interval interval) {		
+		return findNoteByInterval(interval.getValue());
+	}
+	
+	
+
+	/**
+	 * Distance (in semitones) from the first note to the second one.
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	public int distance(Note second){		
+		int octaves = second.getOctave() - getOctave();
+		int notes = second.getNote() - getNote();
+		return notes + octaves * 12;		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
