@@ -36,6 +36,23 @@ public class IntervalTest {
 		assertEquals(new Note("C5").findNoteByInterval(Interval.MAJ2).toString(), "D5");		
 	}
 	
+	@Test
+	public final void testIntervalsHigherThanOctave(){		
+		assertEquals(new Note("C4").distance(new Note("C#5")), Interval.MIN9.getValue());
+		assertEquals(new Note("C4").distance(new Note("D5")), Interval.MAJ9.getValue());
+		assertEquals(new Note("D5").distance(new Note("C4")), -Interval.MAJ9.getValue());		
+		assertEquals(new Note("C4").distance(new Note("D#5")), Interval.MIN10.getValue());
+		assertEquals(new Note("C4").distance(new Note("Eb5")), Interval.MIN10.getValue());
+		assertEquals(new Note("C4").distance(new Note("E5")), Interval.MAJ10.getValue());
+		assertEquals(new Note("C4").distance(new Note("F5")), Interval.PERF11.getValue());
+		assertEquals(new Note("C4").distance(new Note("F#5")), Interval.TRITONEOCT.getValue());
+		assertEquals(new Note("C4").distance(new Note("G5")), Interval.PERF12.getValue());
+		assertEquals(new Note("C4").distance(new Note("Ab5")), Interval.MIN13.getValue());
+		assertEquals(new Note("C4").distance(new Note("A5")), Interval.MAJ13.getValue());
+		assertEquals(new Note("C4").distance(new Note("Bb5")), Interval.MIN14.getValue());
+		assertEquals(new Note("C4").distance(new Note("B5")), Interval.MAJ14.getValue());
+		assertEquals(new Note("C#4").distance(new Note("C6")), Interval.MAJ14.getValue());		
+	}
 
 	
 	@Test

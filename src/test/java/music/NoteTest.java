@@ -147,6 +147,13 @@ public class NoteTest {
 		new Note(Note.C, -1);		
 	}
 	
+	@Test
+	public final void testConstructorLegal(){
+		new Note(Note.C, Note.MIN_OCTAVE);
+		new Note(Note.C, Note.MAX_OCTAVE);
+		new Note(Note.B, Note.MAX_OCTAVE);
+	}
+	
 	
 	@Test
 	public final void testTranspose(){		
@@ -181,6 +188,36 @@ public class NoteTest {
 				}				
 			}		
 		}	
+	}
+	
+	@Test
+	public final void testTransposeLegal1(){
+		
+		boolean error = false;
+		
+		Note n = new Note(Note.D, Note.MIN_OCTAVE);
+		n.transpose(-1);
+		n.transpose(-1);
+		try{
+			n.transpose(-1);
+		} catch(IllegalArgumentException e){
+			error = true;
+		}
+		assertTrue(error);		
+	}
+	
+	@Test
+	public final void testTransposeLegal2(){		
+		boolean error = false;		
+		Note n = new Note(Note.A, Note.MAX_OCTAVE);
+		n.transpose(1);
+		n.transpose(1);
+		try{
+			n.transpose(1);
+		} catch(IllegalArgumentException e){
+			error = true;
+		}
+		assertTrue(error);		
 	}
 	
 	@Test
@@ -259,6 +296,11 @@ public class NoteTest {
 	@Test(expected=IllegalArgumentException.class)
 	public final void testTransposeIllegal3(){		
 		new Note(Note.C, 0).transpose(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testTransposeIllegal4(){		
+		new Note(Note.B, Note.MAX_OCTAVE).transpose(1);
 	}
 
 	
