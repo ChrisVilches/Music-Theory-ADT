@@ -221,8 +221,8 @@ public class ChordTest {
 					comp = new Chord(new Note(notes[j], i), type);					
 					assertArrayEquals(ch.getNotes(), comp.getNotes());
 					assertTrue(ch.equals(comp));
-					ch.transpose(2);
-					ch.transpose(-1);
+					ch.transpose(-2);
+					ch.transpose(3);
 				}				
 			}
 		}				

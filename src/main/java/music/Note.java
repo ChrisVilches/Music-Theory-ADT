@@ -80,7 +80,7 @@ public class Note implements Transposable {
 		char letter;
 		
 		if(!m.find()){			
-			throw new IllegalArgumentException("Wrong format " + note + ".");
+			throw new IllegalArgumentException("Wrong format: " + note + ".");
 		}				
 		
 		letter = m.group(1).charAt(0);

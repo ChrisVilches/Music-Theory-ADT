@@ -12,6 +12,7 @@ public class Chord implements Transposable {
 	
 	private Note tonic;	
 	private ChordType type;
+	private Note[] notes;
 	
 	public Note getTonic(){
 		return tonic;
@@ -19,6 +20,10 @@ public class Chord implements Transposable {
 	
 	public ChordType getChordType(){
 		return type;
+	}
+	
+	public Note[] getNotes(){		
+		return notes;		
 	}
 	
 	
@@ -40,27 +45,27 @@ public class Chord implements Transposable {
 	public Chord(Note tonic, ChordType type){
 		
 		this.tonic = new Note(tonic);
-		this.type = type;		
-	}
-	
-	public Note[] getNotes(){
+		this.type = type;
 		
 		Interval[] intervals = structure.get(this.type);
 		
 		// Base note + intervals
 		int quantity = 1 + intervals.length;
 		
-		Note[] notes = new Note[quantity];
+		notes = new Note[quantity];
 		notes[0] = new Note(tonic);
 		for(int i=1; i<=intervals.length; i++){
 			notes[i] = tonic.findNoteByInterval(intervals[i-1]);
 		}
-		
-		return notes;
 	}
+	
+	
 	
 	public void transpose(int semitones){
 		tonic.transpose(semitones);
+		
+		for(int i=0; i<notes.length; i++)
+			notes[i].transpose(semitones);
 	}
 	
 	
