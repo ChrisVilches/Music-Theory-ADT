@@ -3,7 +3,7 @@ package music;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Note {
+public class Note implements Transposable {
 
 	public static final int MIDDLE_OCTAVE = 4;
 	public static final int MIN_OCTAVE = 0;
@@ -247,14 +247,6 @@ public class Note {
 		int notes = second.getNote() - getNote();
 		return notes + octaves * 12;		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

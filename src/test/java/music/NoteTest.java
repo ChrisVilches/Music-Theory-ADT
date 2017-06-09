@@ -139,7 +139,7 @@ public class NoteTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public final void testConstructorIllegal3(){		
-		new Note(Note.C, 15);		
+		new Note(Note.C, Note.MAX_OCTAVE + 1);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
