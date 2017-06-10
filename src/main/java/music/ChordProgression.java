@@ -29,6 +29,7 @@ public class ChordProgression implements Transposable{
 		chordTypes = new HashMap<>();
 		chordTypes.put("maj", ChordType.MAJOR);
 		chordTypes.put("min", ChordType.MINOR);
+		chordTypes.put("m", ChordType.MINOR);
 		chordTypes.put("maj7", ChordType.MAJ7);
 		chordTypes.put("min7", ChordType.MIN7);
 		chordTypes.put("-7", ChordType.MIN7);
@@ -54,7 +55,7 @@ public class ChordProgression implements Transposable{
 	public static Chord getChordByRomanScaleAgnostic(Note baseNote, String roman){		
 		
 		Matcher m = romanChordPattern.matcher(roman);
-		
+
 		if(!m.find()){			
 			throw new IllegalArgumentException("Wrong format: " + roman + ".");
 		}
