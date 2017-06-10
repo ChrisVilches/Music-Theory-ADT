@@ -23,7 +23,7 @@ public class ChordProgressionTest {
 
 		@Parameters
 		public static Collection<Object> wrongFormatRoman() {
-			return Arrays.asList(new Object[] { "a", "b", "", "34", "VII-6", "Imayor", " II ", "III ", "i#", "ii", "#", "b", "maj7" });
+			return Arrays.asList(new Object[] { "a", "b", "", "34", "VII-6", "Imayor", " II ", "III ", "i#", "ii", "#", "b", "maj7", "IM", "IIIM", "IV#M" });
 		}
 
 		@Parameter
@@ -42,7 +42,7 @@ public class ChordProgressionTest {
 		public static Collection<Object> correctFormatRoman() {
 			return Arrays.asList(new Object[] { "I", "II", "III", "IV", "V", "VI", "VII", "Ib", "IIb", "IIIb", "IVb",
 					"Vb", "VIb", "VIIb", "I#", "II#", "III#", "IV#", "V#", "VI#", "VII#", "IIbmaj", "II#min", "Ib-7",
-					"I#-7", "Vmaj7", "V#maj7", "Vbmin7", "VIm", "VIIm", "Im", "IIm" });
+					"I#-7", "Vmaj7", "V#maj7", "Vbmin7", "VIm", "VIIm", "Im", "IIm", "II#m", "IIIbm", "IV#m", "Ibm" });
 		}
 
 		@Parameter
