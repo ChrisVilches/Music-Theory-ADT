@@ -62,7 +62,7 @@ public class Chord implements Transposable {
 	}
 	
 	
-	
+	@Override
 	public void transpose(int semitones){
 		tonic.transpose(semitones);
 		

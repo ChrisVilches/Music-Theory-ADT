@@ -150,6 +150,7 @@ public class Note implements Transposable {
 	}
 	
 	
+	@Override
 	public void transpose(int semitones){
 		
 		int newNote = Math.floorMod(getNote() + semitones, 12);
@@ -172,7 +173,7 @@ public class Note implements Transposable {
 	 * @param note
 	 * @return
 	 */
-	public static boolean noteIsValid(int note) {
+	private static boolean noteIsValid(int note) {
 		return !(note < C || B < note);
 	}
 
@@ -182,11 +183,11 @@ public class Note implements Transposable {
 	 * @param note
 	 * @return
 	 */
-	public static boolean octaveIsValid(int octave) {
+	private static boolean octaveIsValid(int octave) {
 		return !(octave < MIN_OCTAVE || octave > MAX_OCTAVE);
 	}
 
-	public void setNote(int note, int octave) {
+	private void setNote(int note, int octave) {
 
 		if (!octaveIsValid(octave)) {
 			throw new IllegalArgumentException(
