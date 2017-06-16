@@ -110,7 +110,7 @@ That's why I named this notation `agnostic notation`. It doesn't know about scal
 In the future, new notations can be added, and they could translate to this agnostic notation, for example, something more intelligent like:
 
 ```
-C minor key: I VI VII
+Minor key: I VI VII
 ```
 
 Translate to:
