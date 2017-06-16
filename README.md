@@ -103,7 +103,7 @@ Or in case you want the minor scale:
 Im IIdim IIIb IVm Vm VIb VIIb
 ```
 
-The `b` and `#` can be used in any roman number, even `I`.
+The `b` and `#` modifiers can be used on any roman number, even `I`.
 
 That's why I named this notation `agnostic notation`. It doesn't know about scales or anything.
 
