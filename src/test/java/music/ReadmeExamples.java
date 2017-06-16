@@ -30,24 +30,27 @@ public class ReadmeExamples {
 	@SuppressWarnings("unused")
 	public final void testChords(){
 		Note c = new Note("C");
-		Chord cMajor = new Chord(c, ChordType.MAJOR);
-		
+		Chord cMajor = new Chord(c, ChordType.MAJOR); // C4 major
+				
 		Note d = new Note(Note.D, 2);
-		Chord dAdd9 = new Chord(d, ChordType.MAJadd9);
-		
+		Chord dAdd9 = new Chord(d, ChordType.MAJadd9); // D2 major with add9
+				
 		Note eb7 = new Note("Eb7");
-		Chord ebAug = new Chord(eb7, ChordType.AUG);
+		Chord ebAug = new Chord(eb7, ChordType.AUG); // Eb7 augmented
 	}
 	
 	@Test
 	@SuppressWarnings("unused")
 	public final void testChordInversions(){
+		// C major, root inversion (bass = C)
 		Note c = new Note("C");
 		Chord cMajor = new Chord(c, ChordType.MAJOR, 0);
-		
+			
+		// D major add9, second inversion (bass = A)	
 		Note d = new Note(Note.D, 2);
 		Chord dAdd9 = new Chord(d, ChordType.MAJadd9, 2);
-		
+			
+		// F minor, first inversion (bass = Ab)
 		Note f7 = new Note("F7");
 		Chord fMin = new Chord(f7, ChordType.MINOR, 1);
 	}
