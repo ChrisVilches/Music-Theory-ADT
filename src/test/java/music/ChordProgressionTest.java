@@ -23,7 +23,10 @@ public class ChordProgressionTest {
 
 		@Parameters
 		public static Collection<Object> wrongFormatRoman() {
-			return Arrays.asList(new Object[] { "a", "b", "", "34", "VII-6", "Imayor", " II ", "III ", "i#", "ii", "#", "b", "maj7", "IM", "IIIM", "IV#M" });
+			return Arrays.asList(new Object[] { 
+					"a", "b", "", "34", "VII-6", "Imayor", " II ", "III ", "i#", "ii", "#", "b", "maj7", "IM", "IIIM", "IV#M",
+					"I#-7/-1", "Vmaj7/", "V#maj7/", "Vbmin7/a", "VIm/5x5", "VIIm/a33", "Im/", "IIm//", "II#m/--"
+					});
 		}
 
 		@Parameter
@@ -42,7 +45,10 @@ public class ChordProgressionTest {
 		public static Collection<Object> correctFormatRoman() {
 			return Arrays.asList(new Object[] { "I", "II", "III", "IV", "V", "VI", "VII", "Ib", "IIb", "IIIb", "IVb",
 					"Vb", "VIb", "VIIb", "I#", "II#", "III#", "IV#", "V#", "VI#", "VII#", "IIbmaj", "II#min", "Ib-7",
-					"I#-7", "Vmaj7", "V#maj7", "Vbmin7", "VIm", "VIIm", "Im", "IIm", "II#m", "IIIbm", "IV#m", "Ibm" });
+					"I#-7", "Vmaj7", "V#maj7", "Vbmin7", "VIm", "VIIm", "Im", "IIm", "II#m", "IIIbm", "IV#m", "Ibm",
+					"Vb/2", "VIb/0", "VIIb/1", "I#/2", "II#/1", "III#/0", "IV#/1", "V#/2", "VI#/0",
+					"I#-7/3", "Vmaj7/2", "V#maj7/3", "Vbmin7/1", "VIm/0", "VIIm/0", "Im/2", "IIm/1", "II#m/1" 
+					});
 		}
 
 		@Parameter
@@ -53,6 +59,59 @@ public class ChordProgressionTest {
 			ChordProgression.getChordByRomanScaleAgnostic(new Note(Note.C, 4), correctFormatParameter);
 		}
 	}
+	
+	
+	@RunWith(Parameterized.class)
+	public static class InversionAgnosticRoman {
+
+		@Parameters
+		public static Collection<Object[]> data() {
+			return Arrays.asList(new Object[][] { 
+				{ Note.C, "I II/1 IV", new int[]{Note.C, Note.Fsharp, Note.F}},
+				
+				{ Note.C, "Im IIm/1 IVm", new int[]{Note.C, Note.F, Note.F}},
+				
+				{ Note.C, "II/0 IV/2 V/1", new int[]{Note.D, Note.C, Note.B}},
+				
+				{ Note.C, "V/0 V/1 V/2", new int[]{Note.G, Note.B, Note.D}},
+				
+				{ Note.C, "Imin/2 IImin/1 IVmin/0", new int[]{Note.G, Note.F, Note.F}},
+				
+				{ Note.B, "I-7/3 IIb/1 IV#/2", new int[]{Note.A, Note.E, Note.C}},
+				
+				{ Note.B, "I#-7/3 IIb/2 IV#/1", new int[]{Note.Bb, Note.G, Note.A}},
+
+				{ Note.Bb, "VII/1 VIbmaj7/2 Vaug/2", new int[]{Note.Csharp, Note.Csharp, Note.Csharp}},
+				
+				{ Note.D, "VIIb-7/0 VIbmaj7/1 V#7/2", new int[]{Note.C, Note.D, Note.F}},
+			});
+		}
+		
+		@Parameter(0)
+		public int baseNote;
+
+		@Parameter(1)
+		public String notation;		
+		
+		@Parameter(2)
+		public int[] bassNotes;
+
+		@Test
+		public final void testInversionProgressionCorrectBassNote() {
+			
+			ChordProgression cp = new ChordProgression(new Note(baseNote), notation); 
+			
+			assertEquals(cp.getChordSequence().size(), bassNotes.length);
+			
+			for(int i=0; i<bassNotes.length; i++){
+				
+				assertEquals(cp.getChordSequence().get(i).getBass().getNote(), bassNotes[i]);
+				
+			}
+		}
+	}
+	
+	
 
 	@RunWith(Parameterized.class)
 	public static class AgnosticRomanProgressionCreation {

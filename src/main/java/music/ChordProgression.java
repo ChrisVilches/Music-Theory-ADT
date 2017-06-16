@@ -11,7 +11,7 @@ import music.Chord.ChordType;
 public class ChordProgression implements Transposable{
 	
 	private ArrayList<Chord> chordSequence;	
-	private static final String romanRegex = "^(I|II|III|IV|V|VI|VII)(#|b)?([-a-z0-9]+)?$";
+	private static final String romanRegex = "^(I|II|III|IV|V|VI|VII)(#|b)?([-a-z0-9]+)?(?:/([0-9]+))?$";
 	private static final Pattern romanChordPattern = Pattern.compile(romanRegex);
 	private Note baseNote;
 	
@@ -61,6 +61,7 @@ public class ChordProgression implements Transposable{
 		}
 		
 		int semitonesUp = -100000;
+		int inversion = 0;
 		
 		if(m.group(1).equals("I")) semitonesUp = Interval.UNISON.getValue();
 		else if(m.group(1).equals("II")) semitonesUp = Interval.MAJ2.getValue();
@@ -73,6 +74,10 @@ public class ChordProgression implements Transposable{
 		if(m.group(2) != null){			
 			if(m.group(2).equals("#")) semitonesUp++;
 			else if(m.group(2).equals("b")) semitonesUp--;			
+		}
+		
+		if(m.group(4) != null){
+			inversion = Integer.parseInt(m.group(4));
 		}
 		
 		Note base = new Note(baseNote);
@@ -89,7 +94,7 @@ public class ChordProgression implements Transposable{
 			throw new IllegalArgumentException("Chord type not known: " + m.group(3) + ".");
 		}
 		
-		return new Chord(base, type);		
+		return new Chord(base, type, inversion);		
 	}
 	
 	

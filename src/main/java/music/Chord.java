@@ -12,6 +12,7 @@ public class Chord implements Transposable {
 	
 	private Note tonic;	
 	private ChordType type;
+	private int inversion;
 	private Note[] notes;
 	
 	public Note getTonic(){
@@ -24,6 +25,14 @@ public class Chord implements Transposable {
 	
 	public Note[] getNotes(){		
 		return notes;		
+	}
+	
+	public int getInversion(){
+		return inversion;
+	}
+	
+	public Note getBass(){
+		return notes[inversion];
 	}
 	
 	
@@ -45,11 +54,26 @@ public class Chord implements Transposable {
 	
 	
 	public Chord(Note tonic, ChordType type){
+		this(tonic, type, 0);
+	}
+	
+	
+	
+	public Chord(Note tonic, ChordType type, int inversion){
 		
 		this.tonic = new Note(tonic);
 		this.type = type;
+		this.inversion = inversion;
 		
 		Interval[] intervals = structure.get(this.type);
+		
+		if(inversion < 0){
+			throw new IllegalArgumentException("Inversion can't be negative.");
+		}
+		
+		if(inversion > intervals.length){
+			throw new IllegalArgumentException("Chord has only " + (intervals.length + 1) + " notes, but inversion " + inversion + " was requested (0 = root inversion).");
+		}
 		
 		// Base note + intervals
 		int quantity = 1 + intervals.length;

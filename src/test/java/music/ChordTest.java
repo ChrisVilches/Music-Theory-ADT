@@ -1,9 +1,16 @@
 package music;
 
 import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 import music.Chord.ChordType;
 
@@ -289,10 +296,77 @@ public class ChordTest {
 			Chord chord = new Chord(note, ChordType.MAJOR);
 			chord.transpose(-2);
 		}
-		
-	
+			
 	}
 	
+	@RunWith(Parameterized.class)
+	public static class ChordInversionWrong{
+		
+		@Parameters
+		public static Collection<Object[]> data() {
+			return Arrays.asList(new Object[][] { 
+				{ Note.C, ChordType.MAJOR, 3 },
+				{ Note.Fsharp, ChordType.MINOR, -1 },
+				{ Note.Gsharp, ChordType.AUG, -2 },
+				{ Note.C, ChordType.MAJ7, 4 },
+				{ Note.Fsharp, ChordType.MAJORMIN7, 4 },
+				{ Note.Gsharp, ChordType.MINadd9, 4 },
+			});
+		}
+		
+		@Parameter(0)
+		public int baseNote;
+		
+		@Parameter(1)
+		public ChordType chordType;
+		
+		@Parameter(2)
+		public int inversion;
+		
+		@Test(expected=IllegalArgumentException.class)
+		public final void testWrongInversion(){
+			new Chord(new Note(baseNote, 4), chordType, inversion);
+		}		
+	}
+	
+	@RunWith(Parameterized.class)
+	public static class ChordInversionCorrect{
+		
+		@Parameters
+		public static Collection<Object[]> data() {
+			return Arrays.asList(new Object[][] { 
+				{ Note.C, ChordType.MAJOR, 2, Note.G },
+				{ Note.Fsharp, ChordType.MINOR, 0, Note.Fsharp },
+				{ Note.Gsharp, ChordType.AUG, 1, Note.C },
+				{ Note.C, ChordType.MAJ7, 3, Note.B },
+				{ Note.C, ChordType.MAJORMIN7, 3, Note.Bb },
+				{ Note.Fsharp, ChordType.MAJORMIN7, 2, Note.Csharp },
+				{ Note.Gsharp, ChordType.MINadd9, 1, Note.B },
+				{ Note.B, ChordType.MINadd9, 3, Note.Csharp },
+				{ Note.D, ChordType.AUG, 2, Note.Bb }
+			});
+		}
+		
+		@Parameter(0)
+		public int baseNote;
+		
+		@Parameter(1)
+		public ChordType chordType;
+		
+		@Parameter(2)
+		public int inversion;
+		
+		@Parameter(3)
+		public int bassNote;
+		
+		@Test
+		public final void testCorrectInversion(){
+			Chord ch = new Chord(new Note(baseNote, 4), chordType, inversion);
+			assertEquals(ch.getBass().getNote(), bassNote);
+			
+		}		
+	}
+		
 	
 	/* Needs to test other chords */
 
