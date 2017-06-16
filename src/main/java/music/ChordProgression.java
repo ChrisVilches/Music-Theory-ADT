@@ -36,6 +36,7 @@ public class ChordProgression implements Transposable{
 		chordTypes.put("aug", ChordType.AUG);
 		chordTypes.put("7", ChordType.MAJORMIN7);
 		chordTypes.put("majmin7", ChordType.MAJORMIN7);
+		chordTypes.put("dim", ChordType.DIM);
 	}
 	
 	

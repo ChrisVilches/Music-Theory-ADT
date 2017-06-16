@@ -6,7 +6,7 @@ public class Chord implements Transposable {
 	
 	public enum ChordType {
 		
-		MAJOR, MINOR, MAJ7, MIN7, AUG, MAJORMIN7, MAJadd9, MINadd9
+		MAJOR, MINOR, MAJ7, MIN7, AUG, MAJORMIN7, MAJadd9, MINadd9, DIM
 		
 	}	
 	
@@ -49,6 +49,7 @@ public class Chord implements Transposable {
 		structure.put(ChordType.MAJORMIN7, new Interval[]{Interval.MAJ3, Interval.PERF5, Interval.MIN7});		
 		structure.put(ChordType.MAJadd9, new Interval[]{Interval.MAJ3, Interval.PERF5, Interval.MAJ9});
 		structure.put(ChordType.MINadd9, new Interval[]{Interval.MIN3, Interval.PERF5, Interval.MAJ9});
+		structure.put(ChordType.DIM, new Interval[]{Interval.MIN3, Interval.TRITONE});
 	}
 	
 	
